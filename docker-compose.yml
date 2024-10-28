@@ -1,0 +1,33 @@
+services:
+  whisper-asr:
+    image: onerahmet/openai-whisper-asr-webservice:latest-gpu
+    # Use this instead if you want it to run on CPU
+    #image: onerahmet/openai-whisper-asr-webservice:latest
+    container_name: whisper-asr
+    ports:
+      - "9000:9000"
+    environment:
+      # Use "base" or "small" if you don't go with GPU
+      - ASR_MODEL=large-v3
+      - ASR_ENGINE=openai_whisper
+    volumes:
+      - ./whispercache:/root/.cache/whisper
+    # Can leave this out if you run it on CPU
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
+
+  transcriber:
+    image: transcriber
+    container_name: transcriber
+    restart: always
+    environment:
+      - API_ENDPOINT=http://whisper-asr:9000
+    volumes:
+      - ./data/incoming:/incoming
+      - ./data/transcripts:/transcripts
+      - ./data/archive:/archive
+    depends_on:
+      - whisper-asr

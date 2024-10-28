@@ -1,0 +1,15 @@
+/whispercache
+
+# Ignore everything in the data folder
+/data/**
+
+# Whitelist the specific .gitkeep files to keep the folders
+!/data/transcripts/.gitkeep
+!/data/archive/.gitkeep
+!/data/incoming/.gitkeep
+
+# Ensure parent directories are included
+!/data/
+!/data/transcripts/
+!/data/archive/
+!/data/incoming/

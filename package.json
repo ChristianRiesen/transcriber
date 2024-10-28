@@ -1,0 +1,17 @@
+{
+  "name": "transcriber",
+  "version": "0.0.1",
+  "description": "A file processor that watches a directory for audio files and transcribes them using an API.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Christian Riesen",
+  "license": "",
+  "dependencies": {
+    "axios": "^1.3.4",
+    "chokidar": "^3.5.3",
+    "dotenv": "^16.0.3",
+    "form-data": "^4.0.0"
+  }
+}
